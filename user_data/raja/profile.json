@@ -1,0 +1,7 @@
+{
+  "username": "raja",
+  "email": "raja@gmail.com",
+  "password": "ram",
+  "password_hash": "scrypt:32768:8:1$G0T1bxbKnH9Fie9m$e0a7f69846085288b91dc6052fa4331a99dd97d414ca0e0ac03f8787d0ed3570c7436219e73f62604f09279f188a4b6f5d85ab80b13a5f312efb7a55c7ddde09",
+  "created_at": "2025-11-30T04:15:30.764261Z"
+}
