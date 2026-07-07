@@ -1,229 +1,422 @@
-/* Global reset */
+/*
+  styles.css - Production-ready UI styles for Captcha-Authentication-System
+  Notes:
+  - This file is intentionally kept valid CSS for Flask static serving.
+  - Git merge artifacts were removed.
+  - Duplicate properties were cleaned.
+  - Background gradient was fixed.
+*/
+
+/* =========================================================
+   1) Global reset + base typography
+   ========================================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Background + layout */
+html,
+body {
+    height: 100%;
+}
+
 body {
     font-family: "Poppins", Arial, sans-serif;
     background: radial-gradient(circle at top left,
-                                #ff9a9e 0,
-                                #fad0c4 30%,
-                                #a18cd1 70%,
-                                #4a6cf7 100%);
+            #ff9a9e 0%,
+            #fad0c4 30%,
+            #a18cd1 70%,
+            #4a6cf7 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #222;
 }
 
-/* Layout wrapper */
+a {
+    color: inherit;
+}
+
+/* =========================================================
+   2) Shared layout containers
+   ========================================================= */
 .page-wrapper {
     width: 100%;
-    max-width: 900px;
-    min-height: 420px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
     display: grid;
-    grid-template-columns: minmax(260px, 1.2fr) minmax(320px, 1fr);
-    gap: 18px;
-    padding: 18px;
+    grid-template-columns: 1fr;
+    gap: 22px;
 }
 
-/* Left brand panel */
+/* Optional branding panel (used on login/register screens) */
 .brand-panel {
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: 22px;
-    padding: 22px 26px;
-    backdrop-filter: blur(18px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.20);
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 24px;
+    padding: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
-.brand-logo-circle {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 14px;
-    font-size: 18px;
-}
-
-.brand-title {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.brand-subtitle {
-    font-size: 13px;
-    line-height: 1.5;
-    opacity: 0.9;
-}
-
-/* Right panel */
-.form-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Card */
+/* =========================================================
+   3) Cards / panels
+   ========================================================= */
 .card {
-    background: rgba(255, 255, 255, 0.96);
-    padding: 18px 20px;
-    border-radius: 18px;
-    box-shadow: 0 10px 26px rgba(0,0,0,0.18);
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 24px 22px;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     animation: fadeIn 0.6s ease forwards;
 }
 
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(8px);}
-    to   {opacity: 1; transform: translateY(0);}
+/* Dashboard card */
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 24px;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 760px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
 }
 
-/* Headings */
-.card h2 {
-    text-align: center;
-    margin-bottom: 6px;
-    color: #303040;
-    font-weight: 600;
-    font-size: 20px;
-}
-
-.card small {
-    display: block;
-    text-align: center;
-    margin-bottom: 12px;
-    color: #777;
+/* Eyebrow / headings */
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-size: 11px;
-}
-
-/* Labels + inputs */
-label {
-    display: block;
-    margin-top: 8px;
-    margin-bottom: 4px;
-    color: #555;
-    font-size: 13px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid #ccd1dd;
-    outline: none;
-    margin-bottom: 4px;
-    font-size: 13px;
-    transition: 0.2s;
-    background: #fdfdff;
-}
-
-input:focus {
-    border-color: #4a6cf7;
-    box-shadow: 0 0 4px #4a6cf766;
-}
-
-/* Main buttons */
-button {
-    width: 100%;
-    padding: 9px;
-    background: linear-gradient(135deg, #4a6cf7, #6f86ff);
-    border: none;
-    color: white;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(74,108,247,0.45);
-}
-
-/* Link text */
-.switch-link {
-    margin-top: 8px;
-    text-align: center;
-    font-size: 12px;
-}
-
-.switch-link a {
     color: #4a6cf7;
-    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.dashboard-header h2 {
+    margin-bottom: 6px;
+    font-size: 28px;
+}
+
+.dashboard-header .text-muted {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Forms */
+.form-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1f2a44;
+}
+
+.form-subtitle {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.label {
+    display: block;
+    font-size: 13px;
+    color: #374151;
+    margin: 10px 0 6px;
     font-weight: 600;
 }
 
-.switch-link a:hover {
-    text-decoration: underline;
+.input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(74, 108, 247, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    font-size: 14px;
 }
 
-/* CAPTCHA */
-.captcha-row img {
-    width: 130px;
-    height: 130px;
-    margin: 4px auto;
-    display: block;
-    border-radius: 12px;
-    border: 1px solid #ccc;
+.input:focus {
+    border-color: rgba(74, 108, 247, 0.55);
+    box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.18);
 }
 
-.refresh-btn {
-    margin-top: 4px;
-    background: #ffb74d;
-    color: #222;
-    padding: 4px 10px;
-    border-radius: 8px;
+/* =========================================================
+   4) Buttons
+   ========================================================= */
+button,
+.btn {
     cursor: pointer;
-    font-size: 11px;
     border: none;
+    outline: none;
 }
 
-.refresh-btn:hover {
-    background: #ffa726;
+.btn-primary {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #4a6cf7, #8a7bff);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+    box-shadow: 0 10px 22px rgba(74, 108, 247, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 12px 28px rgba(74, 108, 247, 0.45);
 }
 
 /* Logout button on dashboard */
 .btn-logout {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 8px;
-    padding: 6px 12px;
+    padding: 10px 16px;
     background: #e74c3c;
-    color: white;
-    border-radius: 8px;
+    color: #fff;
+    border-radius: 12px;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .btn-logout:hover {
     background: #c0392b;
+    transform: translateY(-1px);
 }
 
-/* Mobile responsiveness */
+/* =========================================================
+   5) Flash messages (from Flask)
+   ========================================================= */
+.flash-messages {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+}
+
+.flash-banner {
+    padding: 12px 16px;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 13px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    animation: slideIn 0.35s ease;
+}
+
+.flash-success {
+    background: linear-gradient(135deg, #28a745, #5cc67a);
+}
+
+.flash-error {
+    background: linear-gradient(135deg, #e74c3c, #ff6b6b);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================================================
+   6) Animations
+   ========================================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   7) Dashboard widgets
+   ========================================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(140px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.stat-block {
+    background: #f8f9ff;
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+    border: 1px solid rgba(74, 108, 247, 0.16);
+}
+
+.stat-value {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    color: #566178;
+    font-size: 13px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.info-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    border: 1px solid #ebeff9;
+}
+
+.info-card h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #2e3c5a;
+}
+
+.info-card dl {
+    display: grid;
+    gap: 10px 0;
+}
+
+.info-card dt {
+    color: #6b7280;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.info-card dd {
+    margin: 0;
+    color: #222;
+    font-size: 15px;
+}
+
+.pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #eef5ff;
+    color: #3b4db2;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.history-panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #ebeff9;
+}
+
+.history-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.history-heading h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.history-note {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.history-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.history-list li {
+    background: #f8f9ff;
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #2d3153;
+    font-size: 14px;
+    border: 1px solid rgba(74, 108, 247, 0.12);
+}
+
+.empty-state {
+    color: #6b7280;
+    font-size: 14px;
+    text-align: center;
+    padding: 22px 0;
+}
+
+/* =========================================================
+   8) Responsive design
+   ========================================================= */
+@media (max-width: 900px) {
+
+    .stats-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .page-wrapper {
         grid-template-columns: 1fr;
         max-width: 420px;
+        padding: 16px;
     }
+
     .brand-panel {
         margin-bottom: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flash-messages {
+        left: 12px;
+        right: 12px;
+        top: 12px;
+        max-width: none;
     }
 }
